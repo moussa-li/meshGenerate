@@ -92,13 +92,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>nglib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -112,15 +113,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>nglib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -130,15 +132,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAIN;OCCGEOMETRY;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>nglib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -152,22 +155,48 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>nglib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cell.cpp" />
+    <ClCompile Include="src\Element.cpp" />
+    <ClCompile Include="src\ng_occ.cpp" />
+    <ClCompile Include="src\Result.cpp" />
+    <ClCompile Include="src\ViewOCC.cpp" />
+    <ClCompile Include="src\MakeBottle.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\MeshViewer.cpp" />
+    <ClCompile Include="src\Point.cpp" />
+    <ClCompile Include="src\Surface.cpp" />
     <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mesh\refinedSurfmesh0.vol" />
+    <None Include="mesh\refinedSurfmesh54.vol" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Cell.h" />
+    <ClInclude Include="src\Element.h" />
+    <ClInclude Include="src\MakeBottle.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\MeshViewer.h" />
+    <ClInclude Include="src\ng_occ.h" />
+    <ClInclude Include="src\Point.h" />
+    <ClInclude Include="src\Result.h" />
+    <ClInclude Include="src\Surface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
