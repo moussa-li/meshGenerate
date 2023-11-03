@@ -78,7 +78,7 @@ void MeshViewer::Insert_Mesh(Mesh* mesh)
 	std::vector<Surface> MeshSurfaces = mesh->GetSurfaces();
 	for (auto it = MeshSurfaces.begin(); it != MeshSurfaces.end(); ++it)
 	{
-		std::vector<long long> PointIds = it->Get_PointIds();
+		std::vector<size_t> PointIds = it->Get_PointIds();
 		vtkIdType *pointIds = new vtkIdType[it->Get_PointNumber()];
 		for(long long i = 0; i < it->Get_PointNumber(); i++)
 			pointIds[i] = PointIds[i]-1;
@@ -131,7 +131,7 @@ void MeshViewer::Insert_Mesh(Mesh* mesh, float* color)
 	std::vector<Surface> MeshSurfaces = mesh->GetSurfaces();
 	for (auto it = MeshSurfaces.begin(); it != MeshSurfaces.end(); ++it)
 	{
-		std::vector<long long> PointIds = it->Get_PointIds();
+		std::vector<size_t> PointIds = it->Get_PointIds();
 		vtkIdType *pointIds = new vtkIdType[it->Get_PointNumber()];
 		for(long long i = 0; i < it->Get_PointNumber(); i++)
 			pointIds[i] = PointIds[i]-1;
@@ -152,7 +152,7 @@ void MeshViewer::Insert_Mesh(Mesh* mesh, float* color)
 	Mapper->SetInputData(vesselPointsPolyData);
 
 	m_Actors->SetMapper(Mapper);
-	m_Actors->GetProperty()->SetRepresentationToWireframe();
+	//m_Actors->GetProperty()->SetRepresentationToWireframe();
     m_Actors->GetProperty()->EdgeVisibilityOn();
     m_Actors->GetProperty()->SetOpacity(1.0);
 	//m_Actors->GetProperty()->SetColor(0, 1, 0);

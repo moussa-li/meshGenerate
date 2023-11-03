@@ -1,4 +1,19 @@
 #include "ng_occ.h"
+#include <algorithm>
+
+void test_generate(std::string pathDir)
+{
+    using namespace nglib;
+    
+    Ng_Mesh* mesh;
+    Ng_Init();
+    mesh = Ng_LoadMesh(pathDir.c_str());
+    
+    Ng_Meshing_Parameters mp;
+    mp.fineness = 1;
+
+    Ng_GenerateVolumeMesh(mesh, &mp);
+}
 
 int ng_occ(std::string pathDir,std::string resDir)
 {
@@ -132,7 +147,7 @@ int ng_occ(std::string pathDir,std::string resDir)
    cout << "Number of volume elements = " << Ng_GetNE(occ_mesh) << endl;
    
    cout << "Saving Mesh as VOL file....." << endl;
-   //Ng_SaveMesh(occ_mesh,"test_occ.vol");
+   Ng_SaveMesh(occ_mesh,"test_occ.vol");
 
 /*
 Result res(196041);
@@ -141,7 +156,68 @@ res.Load("case.dat");
    return 0;
 }
 
-void check_Mesh(Mesh* mesh, Result* res)
+void check_Mesh(std::string pathDir)
 {
+    // 指定你的VTU文件的路径
+    const char* vtu_file_path = pathDir.c_str();
+
+    vtkSmartPointer<vtkXMLUnstructuredGridReader> reader = vtkSmartPointer<vtkXMLUnstructuredGridReader>::New();
+    reader->SetFileName(vtu_file_path);
+    reader->Update();
+
+    vtkSmartPointer<vtkUnstructuredGrid> unstructuredGrid = reader->GetOutput();
+
+    // 获取 von Mises 应力数据
+    vtkSmartPointer<vtkDoubleArray> vonMisesData = vtkDoubleArray::SafeDownCast(unstructuredGrid->GetPointData()->GetArray("vonmises"));
+
+    if (vonMisesData) {
+        vector<int> res(5);
+
+        int numCells = unstructuredGrid->GetNumberOfCells();
+        for (int i = 0; i < numCells; i++)
+        {
+            vtkCell* cell = unstructuredGrid->GetCell(i);
+            int numPoint = cell->GetNumberOfPoints();
+
+            double max_value = INT_MIN, min_value = INT_MAX;
+
+            for (int j = 0; j < numPoint; j++)
+            {
+                int PointId = cell->GetPointId(j);
+                double value = vonMisesData->GetValue(PointId);
+                max_value = std::max(max_value, value);
+                min_value = std::min(min_value, value);
+                //std::cout << vonMisesData->GetValue(PointId) << " ";
+            }
+            if (min_value == 0)
+                continue;
+            double rate = max_value / min_value;
+            if (rate <= 2)
+                res[0]++;
+            else if (rate > 2 && rate <= 5)
+                res[1]++;
+            else if (rate > 5 && rate <= 10)
+                res[2]++;
+            else if (rate > 1000 && rate <= 10000)
+                res[3]++;
+            else res[4]++;
+                        //std::cout << std::endl;
+
+        }
+        for (int i = 0; i < 5; i++)
+                std::cout << res[i] << std::endl;
+
+        /*int numPoints = vonMisesData->GetNumberOfTuples();
+        std::cout << "von Mises Stress Data:" << std::endl;
+        for (int i = 0; i < numPoints; i++) {
+            double value = vonMisesData->GetValue(i);
+            std::cout << "Value at Point " << i << ": " << value << std::endl;
+        }*/
+    } else {
+        std::cerr << "von Mises stress data not found in the VTU file." << std::endl;
+        return ;
+    }
+
+    return;
 
 }

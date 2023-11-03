@@ -5,6 +5,7 @@
 #include "Mesh.h"
 void Mesh::Read(std::string FileName)
 {
+    std::cout << "Read Mesh : [" << FileName << "]" << std::endl;
 	std::fstream file;
 	file.open(FileName, std::ios::in);
 	if (file.is_open() == 0) {
@@ -25,8 +26,13 @@ void Mesh::Read(std::string FileName)
         {
 			Read_SurfacesSUV(file);
 		}
-		std::cout << buffer << std::endl;
+        else if (std::string(buffer) == "volumeelements")
+        {
+            Read_Volumes(file);
+        }
+		//std::cout << buffer << std::endl;
 	file.close();
+    std::cout << "Read Mesh Done: [" << FileName << "]" << std::endl;
 }
 
 void Mesh::Write(std::string FileName)
@@ -113,8 +119,26 @@ bool Mesh::Read_SurfacesSUV(std::fstream& file)
 	return true;
 }
 
-bool Mesh::Read_Elements(std::fstream &file)
+bool Mesh::Read_Volumes(std::fstream &file)
 {
+    char buffer[1024] = "";
+    file >> buffer;
+    unsigned int VolumeNumber = atoi(buffer);
+    for (unsigned int i = 0; i < VolumeNumber; i++)
+    {
+        //for (int j = 0; j < 2; j++)
+        file >> buffer;
+        int PointNumber;
+        file >> PointNumber;
+        if (PointNumber == 4)
+        {
+            unsigned int PointId[4];
+			file >> PointId[0] >> PointId[1] >> PointId[2] >> PointId[3];
+            Volume volume(i, VolumeType::Tet4, PointId);
+            Insert(volume);
+        }
+    }
+
 	return true;
 }
 
@@ -123,6 +147,13 @@ bool Mesh::Insert(Point point)
 	// TODO: check the global point size with tmp point
 	//if(m_Points.size())
 	m_Points.emplace_back(point);
+    if (m_PointsHash.find(point) == m_PointsHash.end())
+    {
+	    //m_Points.emplace_back(point);
+        m_PointsCompress.emplace_back(point);
+        m_PointsHash[point] = m_PointsCompress.size()-1;
+    }
+    // TODO: maybe don`t need to remove duplicate
 	return true;
 }
 
@@ -132,4 +163,10 @@ bool Mesh::Insert(Surface surface)
 	//if(m_Points.size())
 	m_Surfaces.emplace_back(surface);
 	return true;
+}
+
+bool Mesh::Insert(Volume volume)
+{
+    m_Volumes.emplace_back(volume);
+    return true;
 }

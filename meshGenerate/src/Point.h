@@ -18,10 +18,23 @@ public:
 
 
 	inline unsigned int Get_Id() { return m_Id; }
-	inline double Get_x() { return m_x; }
-	inline double Get_y() { return m_y; }
-	inline double Get_z() { return m_z; }
+	inline double Get_x() const { return m_x; }
+	inline double Get_y() const { return m_y; }
+	inline double Get_z() const { return m_z; }
 	inline void Set_x(double x) { m_x = x; }
 	inline void Set_y(double y) { m_y = y; }
 	inline void Set_z(double z) { m_z = z; }
+
+    bool operator == (const Point &other) const {
+        return m_x == other.Get_x() && m_y == other.Get_y() && m_z == other.Get_z();
+    }
+};
+
+struct pointHash {
+    std::size_t operator()(const Point& p) const {
+        std::size_t xHash = std::hash<double>()(p.Get_x());
+        std::size_t yHash = std::hash<double>()(p.Get_y());
+        std::size_t zHash = std::hash<double>()(p.Get_z());
+        return xHash ^ (yHash << 1) ^ (zHash << 2);
+    }
 };

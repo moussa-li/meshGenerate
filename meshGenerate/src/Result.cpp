@@ -6,12 +6,12 @@
 
 void Result::Read_Value(std::fstream &file, std::string name) {
     char buffer[1024] = "";
-    file >> buffer;
+    //file >> buffer;
 
     m_Data[name] = std::vector<float>(m_Size);
     for (size_t i = 0; i < m_Size; i++)
     {
-        float value= 0;
+        //float value= 0;
         file >> buffer;
         //file >> value;
         m_Data[name][i] = atof(buffer);
@@ -21,6 +21,7 @@ void Result::Read_Value(std::fstream &file, std::string name) {
 
 void Result::Load(std::string fileDir)
 {
+    std::cout << "Read Result : [" << fileDir << "]" << std::endl;
     std::fstream file;
     file.open(fileDir, std::ios::in);
     if (file.is_open() == 0)
@@ -39,6 +40,7 @@ void Result::Load(std::string fileDir)
         }
     }
     file.close();
+    std::cout << "Read Result Done: [" << fileDir << "]" << std::endl;
 }
 
 std::vector<float> Result::Get_Data(std::string name)
