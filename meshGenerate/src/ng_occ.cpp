@@ -120,7 +120,7 @@ int ng_occ(std::string pathDir,std::string resDir)
    //Ng_GetPoint(occ_mesh, 100, x);
    //double test = NG_GetH(occ_mesh, x);
    Ng_RestrictMeshSizePoint(occ_mesh, x, 2);
-   double test = NG_GetH(occ_mesh, y);
+   //double test = NG_GetH(occ_mesh, y);
  
    ng_res = Ng_OCC_GenerateSurfaceMesh(occ_geom, occ_mesh, &mp);
    if(ng_res != NG_OK)

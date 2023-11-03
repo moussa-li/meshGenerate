@@ -92,13 +92,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;$(ProjectDir)dependencies\VTK\include\vtk-9.2;$(NetgenDir)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\OCCT\win64\vc14\bind;$(ProjectDir)dependencies\VTK\lib;$(NetgenDir)\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -113,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;$(ProjectDir)dependencies\VTK\include\vtk-9.2;$(NetgenDir)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -121,7 +121,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\OCCT\win64\vc14\bind;$(ProjectDir)dependencies\VTK\lib;$(NetgenDir)\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -134,13 +134,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>MAIN;OCCGEOMETRY;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;$(ProjectDir)dependencies\VTK\include\vtk-9.2;$(NetgenDir)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\OCCT\win64\vc14\bind;$(ProjectDir)dependencies\VTK\lib;$(NetgenDir)\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -155,7 +155,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\include\vtk-9.2;D:\netgen_install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dependencies\OCCT\inc;$(ProjectDir)dependencies\VTK\include\vtk-9.2;$(NetgenDir)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4819</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -163,7 +163,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\c++ program\meshGenerate\meshGenerate\dependencies\OCCT\win64\vc14\bind;E:\c++ program\meshGenerate\meshGenerate\dependencies\VTK\lib;D:\netgen_install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)dependencies\OCCT\win64\vc14\bind;$(ProjectDir)dependencies\VTK\lib;$(NetgenDir)\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>nglib.lib;$(ProjectDir)dependencies/VTK/lib/*.lib;$(projectDir)dependencies/OCCT/win64/vc14/libd/*.lib</AdditionalDependencies>
     </Link>
     <ProjectReference>
