@@ -33,7 +33,7 @@
     <ClCompile Include="src\Surface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Element.cpp">
+    <ClCompile Include="src\Volume.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\MakeBottle.cpp">
@@ -46,6 +46,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Result.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\generate_vol.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,7 +72,7 @@
     <ClInclude Include="src\Surface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Element.h">
+    <ClInclude Include="src\Volume.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\MakeBottle.h">

@@ -172,7 +172,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Cell.cpp" />
-    <ClCompile Include="src\Element.cpp" />
+    <ClCompile Include="src\generate_vol.cpp" />
+    <ClCompile Include="src\Volume.cpp" />
     <ClCompile Include="src\ng_occ.cpp" />
     <ClCompile Include="src\Result.cpp" />
     <ClCompile Include="src\ViewOCC.cpp" />
@@ -189,7 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cell.h" />
-    <ClInclude Include="src\Element.h" />
+    <ClInclude Include="src\Volume.h" />
     <ClInclude Include="src\MakeBottle.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshViewer.h" />
