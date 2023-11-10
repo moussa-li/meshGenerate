@@ -4,7 +4,9 @@
 
 #include "ng_occ.h"
 
+#include <iostream>
 #include <algorithm>
+#include <filesystem>
 
 
 int main(int argc, char **argv)
@@ -19,7 +21,8 @@ int main(int argc, char **argv)
     for (int i = 0; i < 8; i++)
     {
         Mesh mesh;
-        string inputDir = "mesh/VisualResultsCroase/zhengfangti/volfined" + to_string(i) + ".vol";
+        
+        std::filesystem::path inputDir = "mesh/VisualResultsCroase/zhengfangti/volfined" + to_string(i) + ".vol";
         mesh.Read(inputDir);
         meshes.push_back(mesh);
 

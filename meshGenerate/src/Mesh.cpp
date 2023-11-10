@@ -1,17 +1,41 @@
-#include <fstream>
-#include <iostream>
-#include <assert.h>
-
 #include "Mesh.h"
-void Mesh::Read(std::string FileName)
+void Mesh::Read(std::filesystem::path FilePath)
 {
-    std::cout << "Read Mesh : [" << FileName << "]" << std::endl;
-	std::fstream file;
-	file.open(FileName, std::ios::in);
-	if (file.is_open() == 0) {
-		std::cout << "FileName : [" << FileName << "]is not open!" << std::endl;
-		assert(0);
-	}
+    if (!std::filesystem::exists(FilePath))
+    {
+
+        //}
+        
+        //if (file.is_open() == 0) {
+        std::cout << "FileName : [" << FilePath << "]is not exists!" << std::endl;
+        assert(0);
+    }
+    std::cout << "Read Mesh : [" << FilePath << "]" << std::endl;
+    std::string extension = FilePath.extension().string(); // 获取文件后缀
+
+    if (!extension.empty()) {
+        if (extension == ".vol")
+        {
+            Read_Vol(FilePath.string());
+        }
+        else
+        {
+            std::cout << "The file type is not supported" << std::endl;
+        }
+    }
+    else {
+        std::cout << "The file doesn't have extension" << std::endl;
+    }
+}
+void Mesh::Read_Vol(std::string FilePath)
+{
+    std::fstream file;
+    file.open(FilePath, std::ios::in);
+    if (file.is_open() == 0)
+    {
+        std::cout << "FileName : [" << FilePath << "]is not open!" << std::endl;
+        assert(0);
+    }
 	char buffer[1024] = "";
 	while(file >> buffer)
 		if (std::string(buffer) == "points")
@@ -32,7 +56,7 @@ void Mesh::Read(std::string FileName)
         }
 		//std::cout << buffer << std::endl;
 	file.close();
-    std::cout << "Read Mesh Done: [" << FileName << "]" << std::endl;
+    std::cout << "Read Mesh Done: [" << FilePath << "]" << std::endl;
 }
 
 void Mesh::Write(std::string FileName)

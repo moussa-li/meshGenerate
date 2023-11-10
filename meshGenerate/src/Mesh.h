@@ -1,5 +1,9 @@
 #pragma once
 //#include <list>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+#include <assert.h>
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -23,6 +27,7 @@ private:
 
 
 	//TODO:: Part, Set, Color
+    void Read_Vol(std::string FilePath);
 
 	bool Read_Points(std::fstream& file);
 	bool Read_Surfaces(std::fstream& file);
@@ -42,7 +47,7 @@ public:
 	inline std::vector<Surface>  GetSurfaces() const { return m_Surfaces; }
 	inline std::vector<Volume>  GetVolumes() const { return m_Volumes; }
 
-	void Read(std::string FileName);
+	void Read(std::filesystem::path FileName);
 	void Write(std::string FileName);
 
 
