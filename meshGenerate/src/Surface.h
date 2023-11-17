@@ -20,6 +20,9 @@ private:
 
 public:
 	Surface(unsigned int id, SurfaceType type, unsigned int *PointId);
+    Surface(unsigned int P1, unsigned int P2, unsigned int P3);
+    Surface(unsigned int P1, unsigned int P2, unsigned int P3, unsigned int p4);
+	Surface(SurfaceType type, unsigned int *PointId);
 
 	inline size_t Get_PointNumber() const { return m_PointNumber; }
 	inline std::vector<size_t> Get_PointIds() const { return m_PointIds; }

@@ -176,7 +176,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Cell.cpp" />
+    <ClCompile Include="src\Delaunay.cpp" />
+    <ClCompile Include="src\Edge.cpp" />
+    <ClCompile Include="src\Face.cpp" />
     <ClCompile Include="src\generate_vol.cpp" />
+    <ClCompile Include="src\Geometry.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Volume.cpp" />
     <ClCompile Include="src\ng_occ.cpp" />
     <ClCompile Include="src\Result.cpp" />
@@ -186,14 +191,20 @@
     <ClCompile Include="src\MeshViewer.cpp" />
     <ClCompile Include="src\Point.cpp" />
     <ClCompile Include="src\Surface.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\showMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="geometry\square.geo" />
+    <None Include="mesh\cube.vol" />
     <None Include="mesh\refinedSurfmesh0.vol" />
     <None Include="mesh\refinedSurfmesh54.vol" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cell.h" />
+    <ClInclude Include="src\Delaunay.h" />
+    <ClInclude Include="src\Edge.h" />
+    <ClInclude Include="src\Face.h" />
+    <ClInclude Include="src\Geometry.h" />
     <ClInclude Include="src\Volume.h" />
     <ClInclude Include="src\MakeBottle.h" />
     <ClInclude Include="src\Mesh.h" />

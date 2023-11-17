@@ -39,7 +39,7 @@
     <ClCompile Include="src\MakeBottle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\showMesh.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\ng_occ.cpp">
@@ -51,10 +51,27 @@
     <ClCompile Include="src\generate_vol.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Delaunay.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Edge.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Geometry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Face.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="mesh\refinedSurfmesh0.vol" />
     <None Include="mesh\refinedSurfmesh54.vol" />
+    <None Include="mesh\cube.vol" />
+    <None Include="geometry\square.geo" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MeshViewer.h">
@@ -82,6 +99,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\ng_occ.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Delaunay.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Geometry.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Edge.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Face.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

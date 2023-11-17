@@ -15,12 +15,18 @@ public:
 	Point(unsigned int id)
 		: m_Id(id)
 	{};
-
+    Point(double x, double y, double z) 
+		: m_Id(0), m_x(x), m_y(y), m_z(z)
+	{};
+	Point(double x, double y)
+		: m_Id(0), m_x(x), m_y(y), m_z(0)
+	{};
 
 	inline unsigned int Get_Id() { return m_Id; }
 	inline double Get_x() const { return m_x; }
 	inline double Get_y() const { return m_y; }
 	inline double Get_z() const { return m_z; }
+    inline void Set_Id(unsigned int id) { m_Id = id; }
 	inline void Set_x(double x) { m_x = x; }
 	inline void Set_y(double y) { m_y = y; }
 	inline void Set_z(double z) { m_z = z; }
