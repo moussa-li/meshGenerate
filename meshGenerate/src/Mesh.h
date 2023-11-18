@@ -52,9 +52,12 @@ private:
     //bool Write_SurfacesSUV(std::fstream& file);
 	//bool Write_Volumes(std::fstream& file);
 
-	bool Insert(Point point);
-	bool Insert(Surface surface);
-    bool Insert(Volume volume);
+	bool Insert_Point(Point point);
+	bool Insert_Surface(Surface surface);
+    bool Insert_Volume(Volume volume);
+
+    std::vector<Surface>::iterator Delete_Surface(std::vector<Surface>::iterator it);
+
 public:
 	Mesh() :m_Id(0),max_h(1) {};
 	Mesh(unsigned int id) :m_Id(id) {};

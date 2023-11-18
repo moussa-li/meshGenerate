@@ -152,7 +152,7 @@ bool Mesh::Read_Points(std::fstream &file)
 		point.Set_x(x);
 		point.Set_y(y);
 		point.Set_z(z);
-		Insert(point);
+		Insert_Point(point);
 	}
 	return true;
 }
@@ -173,14 +173,14 @@ bool Mesh::Read_Surfaces(std::fstream &file)
 			unsigned int PointId[3];
 			file >> PointId[0] >> PointId[1] >> PointId[2];
 			Surface surface(i, SurfaceType::Tri, PointId);
-			Insert(surface);
+			Insert_Surface(surface);
 		}
 		else if (PointNumber == 4)
 		{
 			unsigned int PointId[4];
 			file >> PointId[0] >> PointId[1] >> PointId[2] >> PointId[3];
 			Surface surface(i, SurfaceType::Quad, PointId);
-			Insert(surface);
+			Insert_Surface(surface);
 		}
 	}
 	return true;
@@ -202,14 +202,14 @@ bool Mesh::Read_SurfacesSUV(std::fstream& file)
 			unsigned int PointId[3];
 			file >> PointId[0] >> PointId[1] >> PointId[2];
 			Surface surface(i, SurfaceType::Tri, PointId);
-			Insert(surface);
+			Insert_Surface(surface);
 		}
 		else if (PointNumber == 4)
 		{
 			unsigned int PointId[4];
 			file >> PointId[0] >> PointId[1] >> PointId[2] >> PointId[3];
 			Surface surface(i, SurfaceType::Quad, PointId);
-			Insert(surface);
+			Insert_Surface(surface);
 		}
         for(int skip_index = 0; skip_index < 6; skip_index++)
             file >> buffer;
@@ -233,7 +233,7 @@ bool Mesh::Read_Volumes(std::fstream &file)
             unsigned int PointId[4];
 			file >> PointId[0] >> PointId[1] >> PointId[2] >> PointId[3];
             Volume volume(i, VolumeType::Tet4, PointId);
-            Insert(volume);
+            Insert_Volume(volume);
         }
     }
 
@@ -275,7 +275,7 @@ surfaceelements
     return true;
 }
 
-bool Mesh::Insert(Point point)
+bool Mesh::Insert_Point(Point point)
 {
 	// TODO: check the global point size with tmp point
 	//if(m_Points.size())
@@ -290,20 +290,55 @@ bool Mesh::Insert(Point point)
 	return true;
 }
 
-bool Mesh::Insert(Surface surface)
+bool Mesh::Insert_Surface(Surface surface)
 {
 	// TODO: check the global point size with tmp point
 	//if(m_Points.size())
+    auto pointIds = surface.Get_PointIds();
+    for (int i = 0; i < pointIds.size(); i++)
+    {
+        Point *tmp_p = &m_Points[pointIds[i]];
+        auto &neighbors = tmp_p->Get_Neighbors();
+        for (int j = 1; j < pointIds.size(); j++)
+        {
+            //Point* tmp_p1 = &m_Points[pointIds[(i + j) % pointIds.size()]];
+            if (neighbors.find(pointIds[(i + j) % pointIds.size()]) == neighbors.end())
+            {
+                neighbors.insert(pointIds[(i + j) % pointIds.size()]);
+            }
+        }
+    }
 	m_Surfaces.emplace_back(surface);
 	return true;
 }
 
-bool Mesh::Insert(Volume volume)
+bool Mesh::Insert_Volume(Volume volume)
 {
     m_Volumes.emplace_back(volume);
     return true;
 }
 
+
+std::vector<Surface>::iterator Mesh::Delete_Surface(std::vector<Surface>::iterator it)
+{
+    Surface s = *it;
+    auto pointIds = s.Get_PointIds();
+    for (int i = 0; i < pointIds.size(); i++)
+    {
+        Point *tmp_p = &m_Points[pointIds[i]];
+        auto &neighbors = tmp_p->Get_Neighbors();
+        for (int j = 1; j < pointIds.size(); j++)
+        {
+            //Point* tmp_p1 = &m_Points[];
+            if (neighbors.find(pointIds[(i + j) % pointIds.size()]) != neighbors.end())
+            {
+                neighbors.erase(pointIds[(i + j) % pointIds.size()]);
+            }
+        }
+    }
+    it = m_Surfaces.erase(it);
+    return it;
+}
 
 Cricle Mesh::Get_Circumcircle(Surface *s)
 {
@@ -399,9 +434,11 @@ void Mesh::GenerateSurfaceMesh()
     m_Points.push_back(p2);
     m_Points.push_back(p3);
     Surface s1(0, 1, 2);
-    m_Surfaces.push_back(s1);
+    //m_Surfaces.push_back(s1);
+    Insert_Surface(s1);
     Surface s2(0, 2, 3);
-    m_Surfaces.push_back(s2);
+    Insert_Surface(s2);
+    //m_Surfaces.push_back(s2);
 
 
     std::unordered_map<unsigned int, std::vector<size_t>> PointsMap2Surface;
@@ -440,7 +477,7 @@ void Mesh::GenerateSurfaceMesh()
                         NewPointIds.insert(pointId);
                 }*/
                 InnerSurfaces.erase(*it);
-                it = m_Surfaces.erase(it);
+                it = Delete_Surface(it);
             }
             else {
                 ++it;
@@ -452,7 +489,8 @@ void Mesh::GenerateSurfaceMesh()
             unsigned int p2 = it->first;
             unsigned int p3 = it->second;
             Surface s(p1, p2, p3);
-            m_Surfaces.push_back(s);
+            //m_Surfaces.push_back(s);
+            Insert_Surface(s);
             if (p1>=4&&p2>=4&&p3>=4)
             {
                 InnerSurfaces.insert(s);
@@ -525,7 +563,7 @@ void Mesh::GenerateSurfaceMesh()
                         NewPointIds.insert(pointId);
                 }*/
                     InnerSurfaces.erase(*it);
-                    it = m_Surfaces.erase(it);
+                    it = Delete_Surface(it);
                 }
                 else {
                     ++it;
@@ -537,7 +575,8 @@ void Mesh::GenerateSurfaceMesh()
                 unsigned int p2 = it->first;
                 unsigned int p3 = it->second;
                 Surface s(p1, p2, p3);
-                m_Surfaces.push_back(s);
+                //m_Surfaces.push_back(s);
+                Insert_Surface(s);
                 PointsMap2Surface[i].push_back(m_Surfaces.size()-1);
                 if (p1>=4&&p2>=4&&p3>=4)
                 {
@@ -557,7 +596,7 @@ void Mesh::GenerateSurfaceMesh()
         unsigned int p3 = pointIds[2];
         if (p1 < 4 || p2 < 4 || p3 < 4)
         {
-            it = m_Surfaces.erase(it);
+            it = Delete_Surface(it);
         }
         else {
             ++it;
@@ -568,16 +607,26 @@ void Mesh::GenerateSurfaceMesh()
     // TODO: boundary restoration
 
     //smoothing
+    for (int iter = 0; iter < 100; iter++)
+    {
+
     for (int i = 0; i < m_Points.size(); i++)
     {
         if (PointsMap2Surface.find(i) == PointsMap2Surface.end())continue;
         auto SurfaceList = PointsMap2Surface[i];
         double sum_x = 0, sum_y = 0;
-        for (auto s : SurfaceList)
+        auto &PointNeighbors = m_Points[i].Get_Neighbors();
+        for (auto it = PointNeighbors.begin(); it != PointNeighbors.end(); ++it)
         {
-            
-            //sum_x += 
+            sum_x += m_Points[*it].Get_x();
+            sum_y += m_Points[*it].Get_y();
         }
+        double bary_x = sum_x / PointNeighbors.size();
+        double bary_y = sum_y / PointNeighbors.size();
+        Point* p = &m_Points[i];
+        p->Set_x(p->Get_x()*0 + bary_x*1);
+        p->Set_y(p->Get_y()*0 + bary_y*1);
     }
     
+    }
 }

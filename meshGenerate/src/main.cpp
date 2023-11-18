@@ -10,11 +10,6 @@
 
 int main(int argc, char **argv)
 {
- //  if (argc < 2)
- //  {
- //     cerr << "use: ng_occ <src_step>" << endl;
- //     return 1;
- //  }
 
     Mesh *mesh = new Mesh(1.f);
     mesh->Read("geometry/square.geo");
@@ -26,7 +21,6 @@ int main(int argc, char **argv)
     viewer.Insert_Mesh(mesh);
 
 	viewer.View();
-
     
     return 0;
 

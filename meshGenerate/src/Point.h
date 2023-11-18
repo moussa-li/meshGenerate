@@ -1,10 +1,13 @@
 #pragma once
+#include<unordered_set>
 
 class Point
 {
 private:
 	unsigned int m_Id;
 	double m_x, m_y, m_z;
+
+    std::unordered_set<size_t> m_Neighbors;
 public:
 	Point(unsigned int id, double x, double y, double z) 
 		: m_Id(id), m_x(x), m_y(y), m_z(z)
@@ -30,6 +33,7 @@ public:
 	inline void Set_x(double x) { m_x = x; }
 	inline void Set_y(double y) { m_y = y; }
 	inline void Set_z(double z) { m_z = z; }
+    inline std::unordered_set<size_t> &Get_Neighbors() { return m_Neighbors; }
 
     bool operator == (const Point &other) const {
         return m_x == other.Get_x() && m_y == other.Get_y() && m_z == other.Get_z();

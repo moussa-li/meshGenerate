@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "Point.h"
 
@@ -17,6 +18,7 @@ private:
 	size_t m_PointNumber;
 
 	std::vector<size_t> m_PointIds;
+    std::vector<std::shared_ptr<Surface*>> m_Neighbors;
 
 public:
 	Surface(unsigned int id, SurfaceType type, unsigned int *PointId);
@@ -26,4 +28,5 @@ public:
 
 	inline size_t Get_PointNumber() const { return m_PointNumber; }
 	inline std::vector<size_t> Get_PointIds() const { return m_PointIds; }
+    inline std::vector<std::shared_ptr<Surface*>> Get_Neighbors() const { return m_Neighbors; }
 };
