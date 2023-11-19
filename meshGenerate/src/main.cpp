@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     Mesh *mesh = new Mesh(1.f);
     mesh->Read("geometry/square.geo");
     mesh->GenerateSurfaceMesh();
-    //mesh->Write("mesh/square.mesh");
+    mesh->Write("mesh/square.vol");
 
 	MeshViewer viewer;
 

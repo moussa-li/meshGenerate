@@ -377,14 +377,11 @@ bool Mesh::PointInnerCircumcircle(Cricle* c, Point* p)
 
 void Mesh::GenerateSurfaceMesh()
 {
-    //check bb
+    //check bounding box
     if (max_x <= min_x || max_y <= min_y) {
         std::cout << "invalid init mesh" << std::endl;
         return;
     }
-
-	/*std::vector<Point> Points;
-    Points = m_Points;*/
 
     // disperse
     //std::unordered_set<unsigned int> PointSet;
@@ -409,7 +406,7 @@ void Mesh::GenerateSurfaceMesh()
     }
 
 
-    // store inner pointes
+    // store inner points
     std::unordered_set<unsigned int> InnerPoints;
     for (int i = 0; i < Points.size(); i++)
     {
@@ -434,11 +431,9 @@ void Mesh::GenerateSurfaceMesh()
     m_Points.push_back(p2);
     m_Points.push_back(p3);
     Surface s1(0, 1, 2);
-    //m_Surfaces.push_back(s1);
     Insert_Surface(s1);
     Surface s2(0, 2, 3);
     Insert_Surface(s2);
-    //m_Surfaces.push_back(s2);
 
 
     std::unordered_map<unsigned int, std::vector<size_t>> PointsMap2Surface;
@@ -471,11 +466,6 @@ void Mesh::GenerateSurfaceMesh()
                         NewEdges.erase(edge);
                     }
                 }
-                /*for (auto pointId : pointIds)
-                {
-                    if (NewPointIds.find(pointId) == NewPointIds.end())
-                        NewPointIds.insert(pointId);
-                }*/
                 InnerSurfaces.erase(*it);
                 it = Delete_Surface(it);
             }
@@ -489,7 +479,6 @@ void Mesh::GenerateSurfaceMesh()
             unsigned int p2 = it->first;
             unsigned int p3 = it->second;
             Surface s(p1, p2, p3);
-            //m_Surfaces.push_back(s);
             Insert_Surface(s);
             if (p1>=4&&p2>=4&&p3>=4)
             {
@@ -498,9 +487,9 @@ void Mesh::GenerateSurfaceMesh()
         }
         
     }
+    size_t OuterPointIndex = m_Points.size();
 
     // insert inner points
-    //for (int iter = 0; iter < 3; iter++)
     while (1)
     {
         size_t start_pointIndex = m_Points.size();
@@ -508,7 +497,6 @@ void Mesh::GenerateSurfaceMesh()
         {
 
             Cricle c = Get_Circumcircle(const_cast<Surface*>(&(*it)));
-            //if (c.R < 3)continue;
             auto p = it->Get_PointIds();
             double p1_x = m_Points[p[0]].Get_x(), p2_x = m_Points[p[1]].Get_x(), p3_x = m_Points[p[2]].Get_x();
             double p1_y = m_Points[p[0]].Get_y(), p2_y = m_Points[p[1]].Get_y(), p3_y = m_Points[p[2]].Get_y();
@@ -533,7 +521,6 @@ void Mesh::GenerateSurfaceMesh()
         if (start_pointIndex == m_Points.size())break;
         for(int i = start_pointIndex; i < m_Points.size(); i++)
         {
-            //if(InnerSurfaces[j])
             std::unordered_set<std::pair<unsigned int,unsigned int>, PairHash, PairEqual> NewEdges;
             for (auto it = m_Surfaces.begin(); it != m_Surfaces.end();)
             {
@@ -557,11 +544,6 @@ void Mesh::GenerateSurfaceMesh()
                             NewEdges.erase(edge);
                         }
                     }
-                /*for (auto pointId : pointIds)
-                {
-                    if (NewPointIds.find(pointId) == NewPointIds.end())
-                        NewPointIds.insert(pointId);
-                }*/
                     InnerSurfaces.erase(*it);
                     it = Delete_Surface(it);
                 }
@@ -575,9 +557,7 @@ void Mesh::GenerateSurfaceMesh()
                 unsigned int p2 = it->first;
                 unsigned int p3 = it->second;
                 Surface s(p1, p2, p3);
-                //m_Surfaces.push_back(s);
                 Insert_Surface(s);
-                PointsMap2Surface[i].push_back(m_Surfaces.size()-1);
                 if (p1>=4&&p2>=4&&p3>=4)
                 {
                     InnerSurfaces.insert(s);
@@ -585,6 +565,7 @@ void Mesh::GenerateSurfaceMesh()
             }
         }
         std::cout << "The number of Insert New  Surfaces is " << m_Surfaces.size() << std::endl;
+
     }
 
     // delete outer element
@@ -602,7 +583,6 @@ void Mesh::GenerateSurfaceMesh()
             ++it;
         }
     }
-    //m_Points = Points;
 
     // TODO: boundary restoration
 
@@ -610,10 +590,8 @@ void Mesh::GenerateSurfaceMesh()
     for (int iter = 0; iter < 100; iter++)
     {
 
-    for (int i = 0; i < m_Points.size(); i++)
+    for (int i = OuterPointIndex; i < m_Points.size(); i++)
     {
-        if (PointsMap2Surface.find(i) == PointsMap2Surface.end())continue;
-        auto SurfaceList = PointsMap2Surface[i];
         double sum_x = 0, sum_y = 0;
         auto &PointNeighbors = m_Points[i].Get_Neighbors();
         for (auto it = PointNeighbors.begin(); it != PointNeighbors.end(); ++it)
